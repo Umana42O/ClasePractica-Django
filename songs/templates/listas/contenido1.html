@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if vacio %}
+<h1>No hay canciones</h1>
+{% else %}
+<ul>
+{% for i in names %}
+<li>
+    <div style=" display: flex; flex-direction: row; column-gap: 2em;">
+    <a href="{% url 'descripcion' i %}"> {{ i }}</a>
+    <form action="{% url 'eliminar' i %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar">
+    </form>
+    </div>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}
